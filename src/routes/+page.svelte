@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 </script>
 
 <svelte:head>
@@ -21,7 +22,7 @@
 
 		<div class="export-options-container">
 			<div class="option">
-				<a href="/export/list" class="option-title">Liste</a>
+				<a href={resolve('/export/list')} class="option-title">Liste</a>
 
 				<span class="option-description"
 					>Eine tabellarische Liste, die bspw. mehrere Sprachen oder Formen gegenüber stellt.</span

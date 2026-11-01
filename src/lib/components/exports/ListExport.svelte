@@ -77,8 +77,6 @@
 				randomlyHiddenColumns = new Set(pickRandomElements(allColumnIndexes, randomlyHiddenCount));
 			}
 
-			console.log(randomlyHiddenColumns);
-
 			for (let i = 0; i < columnNames.length; i++) {
 				const cellEl = document.createElement('div');
 				cellEl.classList.add('cell');
@@ -130,6 +128,8 @@
 			currentPageEl.appendChild(rowEl);
 			contentHeight += rowEl.offsetHeight;
 
+			console.log({ contentHeight, pageHeight });
+
 			if (contentHeight > pageHeight - PAGE_PADDING * 2) {
 				currentPageEl = createPageEl();
 				pageContainerEl.appendChild(currentPageEl);
@@ -155,7 +155,10 @@
 		tab.window.print();
 	}
 
-	onMount(renderPages);
+	// Temporary and unstable solution.
+	// Since this is usually mounted from another tab, the new tab might be open yet, when this runs.
+	// This result in incorrect offset heights and hence incorrect layouts altogether.
+	onMount(() => setTimeout(renderPages, 500));
 </script>
 
 <div
@@ -175,6 +178,8 @@
 		background-color: #dddddd;
 		padding: 20px;
 		gap: 10px;
+		min-height: 100vh;
+		height: auto;
 	}
 
 	.print-button {
@@ -195,6 +200,7 @@
 		box-shadow: 0 0 10px darkgray;
 		padding: var(--page-padding);
 		overflow: hidden;
+		flex-shrink: 0;
 	}
 
 	:global(h1.list-export) {

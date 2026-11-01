@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import type { LayoutProps } from './$types';
 
 	let { children } = $props();
 
@@ -15,7 +15,7 @@
 	<div class="centered">
 		<h1>Export: {exportTitle}</h1>
 
-		<a href="/">Zurück zur Startseite</a>
+		<a href={resolve('/')}>Zurück zur Startseite</a>
 	</div>
 </header>
 
